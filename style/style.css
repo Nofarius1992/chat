@@ -1,5 +1,11 @@
+html {
+	height: 100%;
+}
+
 body {
 	margin: 0;
+	background-image: url(../img/bg.jpg);
+	height: 100%;
 }
 
 a {
@@ -11,7 +17,16 @@ a {
 a:hover {
 	cursor: pointer;
 }
+
+li {
+	list-style: none;
+}
+
+/*=================
+ Шапка сайта
+ ==================*/
 .header {
+	height: 50px;
 	display: -webkit-flex;
 	display: -moz-flex;
 	display: -ms-flex;
@@ -45,6 +60,9 @@ a:hover {
 	font-size: 20px;
 }
 
+/*=============
+ Меню сайта
+ ==============*/
 .menu {
 	display: -webkit-flex;
 	display: -moz-flex;
@@ -53,3 +71,208 @@ a:hover {
 	display: flex;
 }
 
+/*================
+Блок с контактами и сообщениями
+==================*/
+.content {
+	width: 1000px;
+	height: calc(100% - 70px);
+	margin: 0 auto;
+	background: #fff;
+	overflow: hidden;
+}
+
+/*===============
+Левый блок с поиском и контактами
+=================*/
+.users {
+	height: 100%;
+	width: 320px;
+	float: left;
+}
+/*===============
+Поиск
+=================*/
+.search {
+	width: 100%;
+	padding: 10px;
+}
+
+.search button {
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	border: none;
+	background: #e0e5ef;
+	cursor: pointer;
+	outline: none;
+}
+
+.search button:active {
+	background: #447498;
+}
+
+.search button img {
+	width: 80%;
+	height: 80%;
+}
+
+.search input {
+	width: 75%;
+	height: 30px;
+	padding: 0 5px;
+	margin: 0 10px 0 0;
+	border: none;
+	background: #e0e5ef;
+	float: left;
+	outline: none;
+}
+
+/*===============
+Список контактов
+=================*/
+.list {
+	height: calc(100% - 50px);
+	overflow-y: auto;
+}
+.list ul {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.list ul li {
+	width: calc(100% - 20px);
+	padding: 10px;
+	position: relative;
+}
+
+.icon_user {
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+	float:left;
+}
+
+.icon_user img {
+	width: 100%;
+	height: 100%;
+}
+
+.user_name {
+	margin: 0 0 5px 0;
+	font-size: 20px;
+}
+
+.user_text {
+	margin: 0;
+}
+
+.time {
+	position:absolute;
+	top:10px;
+	right: 10px;
+	font-size: 15px;
+}
+
+/*===============
+Стили для переписки с пользователем
+=================*/
+.message {
+	width: calc(1000px - 320px);
+	float: right;
+	height: 100%;
+
+}
+
+.message_list {
+	height: 80%;
+	overflow-y: auto;
+}
+.message_list li {
+	position: relative;
+	padding: 10px;
+}
+.icon_user {
+
+}
+.icon_user img {
+	width: 50px;
+	height: 50px;
+}
+.user_name {}
+.user_text {}
+.time {}
+.message_form {}
+
+
+/*===============
+Scrool style
+=================*/
+
+.list::-webkit-scrollbar-track,
+.message_list::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.list::-webkit-scrollbar,
+.message_list::-webkit-scrollbar
+{
+	width: 3px;
+	background-color: #F5F5F5;
+}
+
+.list::-webkit-scrollbar-thumb,
+.message_list::-webkit-scrollbar-thumb
+{
+	background-color: #447498;
+}
+
+/*===============
+Форма для отправки сообщений
+=================*/
+.message_form {
+	height: calc(20% - 20px);
+	padding: 10px;
+}
+
+.message_form textarea {
+	width: 60%;
+	height: 80%;
+}
+.message_form button {
+	width: 12%;
+	height: 55%;
+	padding: 0px;
+
+	border: 0;
+	outline: none;
+	background: none;
+	cursor: pointer;
+}
+
+.message_form button img {
+	width: 100%;
+	height: 100%;
+}
+
+.btn_smile {}
+.btn_attach
+.btn_send
+
+
+
+/*===============
+
+=================*/
+/*===============
+
+=================*/
+/*===============
+
+=================*/
+/*===============
+
+=================*/
