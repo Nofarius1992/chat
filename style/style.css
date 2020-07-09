@@ -22,6 +22,102 @@ li {
 	list-style: none;
 }
 
+
+/*===============
+Стили для модальных окон
+=================*/
+
+.modal {
+	display: none;
+	width: 360px;
+	max-height: 400px;
+	padding: 0 5px 20px 20px;
+
+	position: absolute;
+	top: 200px;
+	left: calc(50% - 200px);
+
+	background: #fff;
+	border-radius: 10px;
+	border: 2px solid #447498 ;
+}
+
+.modal_content {
+	height: 360px;
+	margin-top: 30px;
+	overflow-y: auto;
+}
+
+.modal li {
+	height: 50px;
+	margin-bottom: 10px;
+}
+
+.modal li h2.modal_user {
+	padding: 12px;
+}
+
+/*Кнопка закрытия модального окна*/
+.close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+	color: #00365f;
+}
+
+/*Окно входа выхода*/
+#in_out {
+	max-height: 200px;
+	padding: 10px;
+}
+
+#in {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	flex-direction: column;
+}
+
+/*Форма входа выхода*/
+#in h2 {
+	margin: 0 auto;
+	padding-bottom: 20px;
+	color: #00365f;
+}
+#in input {
+	padding: 5px;
+	margin-bottom: 20px;
+	outline: none;
+}
+
+/*Кнопка входа*/
+#in button {
+	width: 20%;
+	margin: 0 auto;
+	padding: 5px;
+
+	font-size: 15px;
+	color: #fff;
+
+	border: 0;
+	background: #447498;
+
+	cursor: pointer;
+	outline: none;
+}
+
+#in button:hover {
+	background: #6588a2;
+}
+
+
 /*=================
  Шапка сайта
  ==================*/
@@ -81,6 +177,8 @@ li {
 	background: #fff;
 	overflow: hidden;
 }
+
+
 
 /*===============
 Левый блок с поиском и контактами
@@ -211,21 +309,25 @@ Scrool style
 =================*/
 
 .list::-webkit-scrollbar-track,
-.message_list::-webkit-scrollbar-track
+.message_list::-webkit-scrollbar-track,
+.modal_content::-webkit-scrollbar-track
+
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 	background-color: #F5F5F5;
 }
 
 .list::-webkit-scrollbar,
-.message_list::-webkit-scrollbar
+.message_list::-webkit-scrollbar,
+.modal_content::-webkit-scrollbar
 {
 	width: 3px;
 	background-color: #F5F5F5;
 }
 
 .list::-webkit-scrollbar-thumb,
-.message_list::-webkit-scrollbar-thumb
+.message_list::-webkit-scrollbar-thumb,
+.modal_content::-webkit-scrollbar-thumb
 {
 	background-color: #447498;
 }
@@ -263,13 +365,10 @@ Scrool style
 .btn_send
 
 
-
 /*===============
 
 =================*/
-/*===============
 
-=================*/
 /*===============
 
 =================*/

@@ -315,7 +315,149 @@
 
 
 
+	<div class="modal" id="contacts_modal">
+		
+		<div class="close close--contacts">x</div>
+
+		<div class="modal_content">
+			<ul>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+				<li>
+					<div class="icon_user">
+						<img src="img/user.png" alt="user">
+					</div>
+					<h2 class="user_name modal_user">Michael</h2>
+				</li>
+			</ul>
+		</div>
+		
+
+	</div>
+
+	<div class="modal" id="in_out">
+		
+		<div class="close close--in">x</div>
+
+		<div class="modal_content" id="in">
+
+			<h2>Авторизация</h2>
+			
+			<input type="text" placeholder="email">
+			<input type="text" placeholder="password">
+			<button>Вход</button>
+
+		</div>
+
+	</div>
 
 
+<script src="script.js"></script>
 </body>
 </html>
