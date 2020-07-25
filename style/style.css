@@ -34,6 +34,7 @@ li {
 	padding: 0 5px 20px 20px;
 
 	position: absolute;
+	z-index: 999;
 	top: 200px;
 	left: calc(50% - 200px);
 
@@ -245,6 +246,11 @@ li {
 	position: relative;
 }
 
+.list ul li a {
+	text-decoration: none;
+	color: #505050;
+	display: block;
+}
 .icon_user {
 	width: 50px;
 	height: 50px;
@@ -287,9 +293,18 @@ li {
 	height: 80%;
 	overflow-y: auto;
 }
+
+.message_list {
+	height: 80%;
+}
+
 .message_list li {
 	position: relative;
 	padding: 10px;
+}
+
+.message_list li a {
+	display: block;
 }
 .icon_user {
 
