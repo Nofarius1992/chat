@@ -7,7 +7,8 @@
 </head>
 <body>
 
-	<!-- Массив имён пользователей -->
+
+	<!-- Массив имён пользователей
 	<?php
 		// подключаем список пользователей
 		include "modules/users.php";
@@ -16,13 +17,13 @@
 			$user_id = $_GET["user"] - 1; // заносим число выбранного пользователя
 			$user = $users[$user_id];
 	?>
-
-	<!-- модальное окно с информацией о пользователе -->
+	
+	модальное окно с информацией о пользователе
 	<div class="modal" style="display: block;">
 		<div class="close">
 			<a href="index.php">X</a>
 		</div>
-		<!-- контект в модальном окне с информацией о пользователе -->
+		контект в модальном окне с информацией о пользователе
 		<div class="modal_content">
 			<h2>Пользователь: <?php echo $user["name"] ?></h2>
 			<h3>Номер: <?php echo $user["id"] ?></h3>
@@ -30,12 +31,11 @@
 			<h3>Телефон: <?php echo $user["contacts"]["phone"] ?></h3>
 		</div>
 	</div>	
+	закрывает проверку на метод GET
+	<?php } ?> 
 	
-	<?php
-		}
-		// подключаем файл с массивом сообщений
-		include "modules/message.php";
-	?>
+		
+	 -->
 	
 	<!-- шапка чата -->
 	<header class="header">
@@ -86,7 +86,7 @@
 					<ul>
 						<!-- Вывод сообщений с помощью ПХП -->
 						<?php
-							include "modules/message_list.php";
+							include "modules/message.php";
 						?>
 					</ul>
 				</div>
