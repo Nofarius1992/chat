@@ -1,157 +1,54 @@
-<?php 
-	// массив сообщений
-	$message = [
-		[
-			// номер мообщения
-			"id" => 1,
-			// номер пользователя
-			"user_id" => 1,
-			// номер пользователя которому адресовано сообщение
-			"user_id_2" => 2,
-			// иконка пользователя
-			"photo" => "img/user.png",
-			// сообщение пользователя
-			"message" => "Як справи, хлопче?",
-			// время отправки сообщения
-			"time" => "09:00",
-		],
-
-		[
-			"id" => 2,
-			"user_id" => 2,
-			"user_id_2" => 1,
-			"photo" => "img/user.png",
-			"message" => "Hi! Good, very good!",
-			"time" => "09:00",
-		],
-
-		[
-			"id" => 3,
-			"user_id" => 1,
-			"user_id_2" => 2,
-			"photo" => "img/user.png",
-			"message" => "І в мене не погано))",
-			"time" => "09:00",
-		],
-
-		[
-			"id" => 4,
-			"user_id" => 2,
-			"user_id_2" => 1,
-			"photo" => "img/user.png",
-			"message" => "Do you speak english?",
-			"time" => "09:00",
-		],
-
-		[
-			"id" => 5,
-			"user_id" => 1,
-			"user_id_2" => 2,
-			"photo" => "img/user.png",
-			"message" => "Та нееее, я сельской парубок, куда же мне, давеча, инглиш спик делать?))",
-			"time" => "09:00",
-		],
-
-		[
-			"id" => 6,
-			"user_id" => 3,
-			"user_id_2" => 4,
-			"photo" => "img/user.png",
-			"message" => "І в мене не погано))",
-			"time" => "09:00",
-		],
-
-		[
-			"id" => 7,
-			"user_id" => 4,
-			"user_id_2" => 3,
-			"photo" => "img/user.png",
-			"message" => "Do you speak english?",
-			"time" => "09:00",
-		],
-
-		[
-			"id" => 8,
-			"user_id" => 3,
-			"user_id_2" => 4,
-			"photo" => "img/user.png",
-			"message" => "Та нееее, я сельской парубок, куда же мне, давеча, инглиш спик делать?))",
-			"time" => "09:00",
-		],
-	];
-?>
 
 <?php 
+
 	$i = 0;
 	// цыкл вывода сообщений
-	
+		if(isset($_GET["user"]) && isset($_COOKIE["user_id"])) {
+			// Получить все сообщения, которые были отправлены пользователю
+			$sql = "SELECT * FROM messages " . // выбираем все сообщения
+						" WHERE (user_id =" . $_GET["user"] .  // где id отрпавляемому пользователю = $_GET["user"]
+							" AND user_id_2 = " . $_COOKIE["user_id"] . ") " . // и отправлено от пользователя с id = 2
+							" OR (user_id_2 = " . $_GET["user"] . " AND user_id =" . $_COOKIE["user_id"] .")"; // ИЛИ отправлено пользователю с id = 2 И от пользователя с id = $_GET["user"]
+			
+			$result = mysqli_query($connect, $sql); // результат sql запроса
 
-		if(isset($_GET["user"])) {
-			while ($i < count($message)) {
-				if($message[$i]["user_id"] == $_GET["user"]) {
-					// сообщение пользователя
-					echo "<li>";
-					// ссылка для информации о пользователе
-					echo "<a href='/index.php?user=" . $message[$i]["user_id"] . "'>";
+			$col_messages = mysqli_num_rows($result); // количество всех сообщений
+			// перебераем сообщения
+			while ($i < $col_messages) {
+				$message = mysqli_fetch_assoc($result); //выводит массив сообщений с интересующими нас данными
+		?>
+				
+				<li>
+					 
+					<a href="/index.php?user=" <?php echo  $message["user_id"]; ?>>
 
-					// иконка пользователя
-					echo "<div class=\"icon_user\">
-						<img src=\"". $message[$i]["photo"] . "\" alt=\"user\">
-						</div>";
-					echo "</a>";	
-					?>
-
+				
+					<div class="icon_user">
+						<img src="<?php echo $message["photo"]; ?> ">
+						</div>
+					</a>	
+				
 					<?php 
-						$user = getUser($message[$i]["user_id"], $users);
+						// вывести имя конкретного пользователя 
+						$sql = "SELECT name FROM `users` WHERE `id` = " . $message["user_id_2"] . "";
+						// выполняем запрос
+						$polzovatel = mysqli_query($connect, $sql);
+						// записываем в переменную массив с данными пользователя
+						$polzovatel = mysqli_fetch_assoc($polzovatel);
 					 ?>
 					
-					<h2 class="user_name"><?php echo $user["name"]; ?></h2>
+					<h2 class="user_name"><?php echo $polzovatel["name"]; ?> </h2>
 
-					<p class="user_text"><?php echo $message[$i]["message"] ?></p>
+					<p class="user_text"><?php echo $message["message"] ?> </p>
 
-					<div class="time"><?php echo $message[$i]["time"] ?></div>
-					<?php  
-					echo "</li>";
+					<div class="time"><?php echo $message["time"] ?> </div>
+					 
+				</li>
+				<?php
 
+				$i = $i + 1;
+			
+			}			
+		} 
 
-					// ответное сообщение
-					echo "<li>";
-					// ссылка для информации о пользователе
-					echo "<a href='/index.php?user=" . $message[$i]["user_id_2"] . "'>";
-
-					// иконка пользователя
-					echo "<div class=\"icon_user\">
-						<img src=\"". $message[$i]["photo"] . "\" alt=\"user\">
-						</div>";
-					echo "</a>";	
-					?>
-
-					<?php 
-						$user = getUser($message[$i]["user_id_2"], $users);
-					 ?>
-					
-					<h2 class="user_name"><?php echo $user["name"]; ?></h2>
-
-					<p class="user_text"><?php echo $message[$i]["message"] ?></p>
-
-					<div class="time"><?php echo $message[$i]["time"] ?></div>
-					<?php  
-					echo "</li>";
-					?>
-
-
-
-
-
-
-					<?php
-				}
-
-
-		
-		$i = $i + 1;
-	}			
-	} else {
-			echo "<h2>Пользователь не выбран</h2>";
-		}			
- ?>
+	?>

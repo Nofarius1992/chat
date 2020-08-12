@@ -1,3 +1,14 @@
+<?php 
+	include "configs/db.php"; 
+	include "configs/setings.php";
+
+	// проверяем авторизован ли пользователь, если нет, то
+	if($polzovatel_id == null) {
+		// переходим на страницу авторизации
+			header("Location: /login.php");
+	}
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,70 +18,22 @@
 </head>
 <body>
 
-
-	<!-- Массив имён пользователей
-	<?php
-		// подключаем список пользователей
-		include "modules/users.php";
-		// делаем проверку на метод GET
-		if (isset($_GET["user"])) {
-			$user_id = $_GET["user"] - 1; // заносим число выбранного пользователя
-			$user = $users[$user_id];
-	?>
-	
-	модальное окно с информацией о пользователе
-	<div class="modal" style="display: block;">
-		<div class="close">
-			<a href="index.php">X</a>
-		</div>
-		контект в модальном окне с информацией о пользователе
-		<div class="modal_content">
-			<h2>Пользователь: <?php echo $user["name"] ?></h2>
-			<h3>Номер: <?php echo $user["id"] ?></h3>
-			<h3>Почта: <?php echo $user["contacts"]["email"] ?></h3>
-			<h3>Телефон: <?php echo $user["contacts"]["phone"] ?></h3>
-		</div>
-	</div>	
-	закрывает проверку на метод GET
-	<?php } ?> 
-	
-		
-	 -->
-	
 	<!-- шапка чата -->
-	<header class="header">
-		<!-- логотип -->
-		<div class="logo">
-			<img class="logo_img" src="img/logo.png" alt="Logo">
-			<h1 class="logo_text">Telegram Web</h1>
-		</div>
-		<!-- меню чата -->
-		<div class="menu"> 
-			<!-- кнопка контакты -->
-			<div class="contacts">
-				<a href="#">Contacts</a>
-			</div>
-			<!-- кнопка настройки -->
-			<div class="settings">
-				<a href="#">Setings</a>
-			</div>
-			<!-- кнопка авторизации -->
-			<div class="log_out">
-				<a href="#">Log Out</a>
-			</div>
-		</div>
-	</header>
-
+	<?php 
+		include("parts_site/header.php") 
+	?>
 	<!-- Блок с контактами и сообщениями -->
 	<div class="content">
 		<!-- Левый блок с поиском и списком пользователей -->
 		<div class="users">
 			<!-- Поиск -->
 			<div class="search">
-				<input type="text" name="text">
-				<button>
-					<img src="img/icon-search.png" alt="search">
-				</button>
+				<form action="index.php" method="GET">	
+					<input type="text" name="search-user">
+					<button>
+						<img src="img/icon-search.png" alt="search">
+					</button>
+				</form>
 			</div>
 
 			<!-- подключаем список контактов через php  -->
@@ -91,18 +54,38 @@
 					</ul>
 				</div>
 				<!-- форма отправки сообщения -->
-				<div class="message_form">
+				<form class="message_form" action="index.php" method="POST">
+					<!-- $_GET["user"] - id пользователя которому отправили сообщение (беру эту переменную из файла list.php 33 string) -->
+					<input type="hidden" name="user_id" value="<?php echo $_GET["user"]; ?>">
+					<input type="hidden" name="user_id_2" value="<?php echo $_COOKIE["user_id"]; ?>">
 					<!-- поле ввода сообщения -->
-					<textarea name="" id="" cols="30" rows="2"></textarea>
+					<textarea name="text" id="" cols="30" rows="2"></textarea>
 					<!-- кнопка смайлов -->
-					<button><img class="btn_smile" src="img/icon-smile.png" alt="Smile"></button>
+				<!-- 	<button type="submit"><img class="btn_smile" src="img/icon-smile.png" alt="Smile"></button> -->
 					<!-- кнопка прикрепления файла -->
-					<button><img class="btn_attach" src="img/icon-attach.png" alt="Attach"></button>
+					<!-- <button type="submit"><img class="btn_attach" src="img/icon-attach.png" alt="Attach"></button> -->
 					<!-- кнопка отправки сообщения -->
-					<button><img class="btn_send" src="img/icon_send.png" alt="Send"></button>
-				</div>
+					<button type="submit"><img class="btn_send" src="img/icon_send.png" alt="Send"></button>
+				</form>
 			</div>
 	</div>
+
+	<?php 
+		/*============================
+		Отправка сообщений от авторизованного пользователя
+		===============================*/
+		if(isset($_POST["text"]) && $_POST["text"] != ""
+			&& isset($_POST["user_id"]) 
+			&& isset($_POST["user_id_2"])
+		) {
+			$sql = "INSERT INTO messages (user_id, user_id_2, message, photo) VALUES ('" . $_POST["user_id"] . "', '" . $_POST["user_id_2"] . "', '". $_POST["text"] ."' , '" . $user["photo"] . "')";
+			if(mysqli_query($connect, $sql)) {
+				echo "<h2>Сообщение отправлено</h2>";
+			} else {
+				echo "<h2>Произошла ошибка</h2>" . mysqli_error($connect);
+			}
+		}
+	 ?>
 
 
 <!-- Модальное окно контактов -->
