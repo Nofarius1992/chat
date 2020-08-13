@@ -7,6 +7,22 @@
 		// переходим на страницу авторизации
 			header("Location: /login.php");
 	}
+
+	/*============================
+	Отправка сообщений от авторизованного пользователя
+	===============================*/
+	if(isset($_POST["otpravka_sms"])) {
+		$sql = "INSERT INTO `messages`(`user_id`, `user_id_2`,`message`) VALUES ('" . $_POST["user_id"] . "', '" . $_POST["user_id_2"] . "', '" . $_POST["text"] . "')";
+		if(mysqli_query($connect, $sql)) {
+			echo "<h2>Сообщение отправлено</h2>";
+		} else {
+			echo "<h2>Возникла ошибка</h2>" . mysqli_error($connect);
+		}
+	}
+
+	/*============================
+	Поиск пользователя 
+	===============================*/
  ?>
 
 <!DOCTYPE html>
@@ -29,6 +45,7 @@
 			<!-- Поиск -->
 			<div class="search">
 				<form action="index.php" method="GET">	
+					<!-- поиск пользователя ($_GET["search-user"]) -->
 					<input type="text" name="search-user">
 					<button>
 						<img src="img/icon-search.png" alt="search">
@@ -38,8 +55,13 @@
 
 			<!-- подключаем список контактов через php  -->
 			<?php 
+				if(isset($_GET["search-user"])) {
+					include "modules/search-user.php";
+				} else {
+					include "modules/list.php";
+				}
 				// include подключить файл
-				include "modules/list.php";
+				
 			 ?>
 		</div>
 
@@ -53,39 +75,30 @@
 						?>
 					</ul>
 				</div>
-				<!-- форма отправки сообщения -->
-				<form class="message_form" action="index.php" method="POST">
-					<!-- $_GET["user"] - id пользователя которому отправили сообщение (беру эту переменную из файла list.php 33 string) -->
-					<input type="hidden" name="user_id" value="<?php echo $_GET["user"]; ?>">
-					<input type="hidden" name="user_id_2" value="<?php echo $_COOKIE["user_id"]; ?>">
-					<!-- поле ввода сообщения -->
-					<textarea name="text" id="" cols="30" rows="2"></textarea>
-					<!-- кнопка смайлов -->
-				<!-- 	<button type="submit"><img class="btn_smile" src="img/icon-smile.png" alt="Smile"></button> -->
-					<!-- кнопка прикрепления файла -->
-					<!-- <button type="submit"><img class="btn_attach" src="img/icon-attach.png" alt="Attach"></button> -->
-					<!-- кнопка отправки сообщения -->
-					<button type="submit"><img class="btn_send" src="img/icon_send.png" alt="Send"></button>
-				</form>
+				<?php 
+					if(isset($_GET["user"])) {
+						?>
+						<!-- форма отправки сообщения -->
+						<form class="message_form"  method="POST">
+							<!-- $_GET["user"] - id пользователя которому отправили сообщение (беру эту переменную из файла list.php 33 string) -->
+							<input type="hidden" name="user_id" value="<?php echo $_GET["user"]; ?>">
+							<!-- ($polzovatel_id взят с файла configs/setings - string 8) -->
+							<input type="hidden" name="user_id_2" value="<?php echo $polzovatel_id; ?>">
+							<!-- поле ввода сообщения -->
+							<textarea name="text" id="" cols="30" rows="2"></textarea>
+							<!-- кнопка смайлов -->
+							<!-- 	<button type="submit"><img class="btn_smile" src="img/icon-smile.png" alt="Smile"></button> -->
+							<!-- кнопка прикрепления файла -->
+							<!-- <button type="submit"><img class="btn_attach" src="img/icon-attach.png" alt="Attach"></button> -->
+							<!-- кнопка отправки сообщения -->
+							<button type="submit" name="otpravka_sms"><img class="btn_send" src="img/icon_send.png" alt="Send"></button>
+						</form>
+						<?php
+					}
+				 ?>
+				
 			</div>
 	</div>
-
-	<?php 
-		/*============================
-		Отправка сообщений от авторизованного пользователя
-		===============================*/
-		if(isset($_POST["text"]) && $_POST["text"] != ""
-			&& isset($_POST["user_id"]) 
-			&& isset($_POST["user_id_2"])
-		) {
-			$sql = "INSERT INTO messages (user_id, user_id_2, message, photo) VALUES ('" . $_POST["user_id"] . "', '" . $_POST["user_id_2"] . "', '". $_POST["text"] ."' , '" . $user["photo"] . "')";
-			if(mysqli_query($connect, $sql)) {
-				echo "<h2>Сообщение отправлено</h2>";
-			} else {
-				echo "<h2>Произошла ошибка</h2>" . mysqli_error($connect);
-			}
-		}
-	 ?>
 
 
 <!-- Модальное окно контактов -->

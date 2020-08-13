@@ -24,7 +24,7 @@
 				$polzovatel = mysqli_fetch_assoc($result);
 				?>
 				<div class="log_out">
-					<a href="exit.php"><?php echo $polzovatel["name"] ?></a>
+					<a href="exit.php"><?php echo $polzovatel["name"] ?> &#187;</a>
 				</div>
 
 				<?php 

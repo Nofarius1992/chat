@@ -3,12 +3,12 @@
 
 	$i = 0;
 	// цыкл вывода сообщений
-		if(isset($_GET["user"]) && isset($_COOKIE["user_id"])) {
+		if(isset($_GET["user"]) && isset($polzovatel_id)) {
 			// Получить все сообщения, которые были отправлены пользователю
 			$sql = "SELECT * FROM messages " . // выбираем все сообщения
 						" WHERE (user_id =" . $_GET["user"] .  // где id отрпавляемому пользователю = $_GET["user"]
-							" AND user_id_2 = " . $_COOKIE["user_id"] . ") " . // и отправлено от пользователя с id = 2
-							" OR (user_id_2 = " . $_GET["user"] . " AND user_id =" . $_COOKIE["user_id"] .")"; // ИЛИ отправлено пользователю с id = 2 И от пользователя с id = $_GET["user"]
+							" AND user_id_2 = " . $polzovatel_id . ") " . // и отправлено от пользователя с id = 2
+							" OR (user_id_2 = " . $_GET["user"] . " AND user_id =" . $polzovatel_id .")"; // ИЛИ отправлено пользователю с id = 2 И от пользователя с id = $_GET["user"]
 			
 			$result = mysqli_query($connect, $sql); // результат sql запроса
 
@@ -24,7 +24,7 @@
 
 				
 					<div class="icon_user">
-						<img src="<?php echo $message["photo"]; ?> ">
+						<img src="img/user.png">
 						</div>
 					</a>	
 				

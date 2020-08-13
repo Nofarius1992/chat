@@ -1,7 +1,7 @@
 <?php 
 
-	// прописал строку текст для получения списка всех пользователей
-	$sql = "SELECT * FROM users";
+	// прописал строку текст для получения списка всех пользователей ($polzovatel_id взят с файла configs/setings - string 8)
+	$sql = "SELECT * FROM users WHERE id != $polzovatel_id";
 
 	// mysqli_query - выполнить sql запрос
 	// 2 параметра: 1. Подключение к базе данных; 2. sql скрипт
@@ -15,15 +15,13 @@
 <div class="list">
 	<ul>
 		<?php
-			if(isset($_COOKIE["user_id"])) {
+			if(isset($polzovatel_id)) {
 			$i = 0;
 			// цыкл вывода пользователей
 			while($i < $col_users) {
 					
 				// mysqli_fetch_assoc - преобразовать полученные данные пользователя в массив
 				$user = mysqli_fetch_assoc($result);
-				// проверяем есть ли авторизованный пользователь
-				if ($_COOKIE["user_id"] != $user["id"]) {
 				?>
 
 				<li>
@@ -45,8 +43,7 @@
 				</li>
 
 				<?php
-					}
-									// добавляем +1 к переменной подсчета колчества цыклов
+				// добавляем +1 к переменной подсчета колчества цыклов
 				$i = $i + 1;	
 			} 
 			}
